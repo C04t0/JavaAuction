@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -44,6 +47,7 @@ public class User {
     @AttributeOverride(name = "city", column = @Column(name = "SHIPPING_CITY"))
     private Address shippingAddress;
 
-    @ManyToOne
-    private BillingDetails billingDetails;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<BillingDetails> billingDetails = new ArrayList<>();
 }

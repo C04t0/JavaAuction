@@ -12,7 +12,6 @@ public interface ItemService {
 
     void placeBid(Long id, Bid bid);
     void deleteItem(Long id);
-
     Item findById(Long id);
     Item findByName(String name);
     List<Item> findAll();

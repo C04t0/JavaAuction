@@ -20,6 +20,11 @@ public abstract class BillingDetails {
     @Column
     private String accountOwner;
 
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
     public abstract void pay(BigDecimal amount);
 
 }

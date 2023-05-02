@@ -9,7 +9,9 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -37,6 +39,12 @@ public class Item {
     private List<Bid> bids;
 
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
-    private List<Image> images;
+    private List<Image> images = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "CATEGORY_ID")
+    private Category category;
+
+    SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 
 }

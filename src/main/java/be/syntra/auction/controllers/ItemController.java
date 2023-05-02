@@ -43,7 +43,7 @@ public class ItemController {
     @PostMapping("/{id}/placebid")
     public ResponseEntity<HttpStatus> placeBid(@PathVariable Long id, @Valid @RequestBody Bid bid) {
         itemService.placeBid(id, bid);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
