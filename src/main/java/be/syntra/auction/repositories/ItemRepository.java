@@ -10,8 +10,7 @@ import java.util.List;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     void deleteById(Long id);
-
     List<Item> findByAuctionEndDate(LocalDate auctionEndDate);
-    Item findByNameContainsIgnoreCase(String name);
+    List<Item> findByNameContainsIgnoreCase(String name);
 
 }

@@ -9,7 +9,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,8 @@ public class Item {
     @NonNull
     private BigDecimal initialPrice;
     @Temporal(TemporalType.DATE)
-    @CreationTimestamp
+    @NonNull
+    @Future
     private LocalDate auctionEndDate;
 
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
@@ -44,7 +44,5 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
-
-    SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
 
 }

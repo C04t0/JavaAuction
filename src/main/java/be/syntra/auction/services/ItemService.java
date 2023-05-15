@@ -12,11 +12,11 @@ public interface ItemService {
 
     void placeBid(Long id, Bid bid);
     void deleteItem(Long id);
+    void createItem(Item item);
     Item findById(Long id);
-    Item findByName(String name);
+    List<Item> findByName(String name);
     List<Item> findAll();
     List<Image> findImageByItem_Id(Long id);
     List<Item> findByAuctionEndDate(LocalDate auctionEndDate);
-    List<BillingDetails> findAllBillingDetails(Long id);
 
 }

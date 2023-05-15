@@ -8,12 +8,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private UserServiceImpl userService;
+
+    @GetMapping
+    public ResponseEntity<List<User>> findallUsers() {
+        return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
+    }
+
+    @PostMapping ("/login")
+    public ResponseEntity<HttpStatus> login(@Valid @RequestBody User user) {
+        userService.login(user);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {

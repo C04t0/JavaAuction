@@ -18,7 +18,7 @@ public class BillingController {
 
     private BillingServiceImpl billingService;
 
-    @PostMapping("user/{id}/pay")
+    @PostMapping("/users/{id}/pay")
     public ResponseEntity<HttpStatus> pay(@PathVariable Long id, @Valid @RequestParam BigDecimal amount) {
         billingService.pay(id, amount);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);

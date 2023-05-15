@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,12 @@ public class User {
 
     @Column
     private String lastName;
+    @Column
+    private String password;
+
+    public String encodePassword() {
+        return new BCryptPasswordEncoder().encode(password);
+    }
 
     @Embedded
     @AttributeOverride(name = "street", column = @Column(name = "HOME_STREET"))
@@ -46,7 +53,6 @@ public class User {
     @AttributeOverride(name = "zipcode", column = @Column(name = "SHIPPING_ZIPCODE"))
     @AttributeOverride(name = "city", column = @Column(name = "SHIPPING_CITY"))
     private Address shippingAddress;
-
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<BillingDetails> billingDetails = new ArrayList<>();

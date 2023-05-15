@@ -7,7 +7,9 @@ import be.syntra.auction.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -18,8 +20,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         Optional<User> entity = userRepository.findById(id);
-        User user = unwrapUser(entity, id);
-        return user;
+        return unwrapUser(entity, id);
+    }
+
+    @Override
+    public void login(User user) {
+
+    }
+    @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -56,6 +66,5 @@ public class UserServiceImpl implements UserService {
             throw new EntityNotFoundException(id, User.class);
         }
     }
-
 
 }

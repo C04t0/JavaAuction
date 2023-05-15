@@ -31,6 +31,6 @@ public class CreditCard extends BillingDetails {
 
     @Override
     public void pay(BigDecimal amount) {
-        System.out.println("An amount of " + amount + "€ will be charged to your account.");
+        System.out.println("An amount of " + amount + "€ will be charged to your credit card.");
     }
 }

@@ -8,6 +8,8 @@ import be.syntra.auction.exceptions.EntityNotFoundException;
 import be.syntra.auction.repositories.ImageRepository;
 import be.syntra.auction.repositories.ItemRepository;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +31,7 @@ public class ItemServiceImpl implements ItemService {
         return unwrapItem(entity, id);
     }
     @Override
-    public Item findByName(String name) {
+    public List<Item> findByName(String name) {
         return itemRepository.findByNameContainsIgnoreCase(name);
     }
     @Override
@@ -42,27 +44,23 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public void createItem(Item item) {
+        itemRepository.save(item);
+    }
+
+    @Override
     public void placeBid(Long id, Bid bid) {
         Optional<Item> entity = itemRepository.findById(id);
         ItemServiceImpl.unwrapItem(entity, id).getBids().add(bid);
     }
-
     @Override
     public void deleteItem(Long id) {
         itemRepository.deleteById(id);
     }
-
+    @Override
     public List<Item> findByAuctionEndDate(LocalDate auctionEndDate) {
         return itemRepository.findByAuctionEndDate(auctionEndDate);
     }
-
-    @Override
-    public List<BillingDetails> findAllBillingDetails(Long id) {
-        Optional<Item> entity = itemRepository.findById(id);
-        //unwrapItem(entity, id).getBillingDetails();
-        return null;
-    }
-
 
     public static Item unwrapItem(Optional<Item> entity, Long id) {
         if (entity.isPresent()) {
