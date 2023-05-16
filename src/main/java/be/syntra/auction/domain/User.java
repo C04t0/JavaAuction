@@ -1,6 +1,8 @@
 package be.syntra.auction.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -19,22 +21,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank (message = "username cannot be blank.")
+    @NotNull (message = "username cannot be null.")
     @NonNull
     @Column
     private String username;
-
     @Column
     private String firstName;
-
     @Column
     private String lastName;
+    @NotBlank (message = "password cannot be blank.")
+    @NotNull (message = "password cannot be null.")
+    @NonNull
     @Column
     private String password;
-
-    public String encodePassword() {
-        return new BCryptPasswordEncoder().encode(password);
-    }
 
     @Embedded
     @AttributeOverride(name = "street", column = @Column(name = "HOME_STREET"))
