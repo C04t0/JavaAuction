@@ -33,12 +33,19 @@ public class Item {
     @Temporal(TemporalType.DATE)
     @NonNull
     @Future
+    @Column
     private LocalDate auctionEndDate;
 
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
+    @Column
     private List<Bid> bids;
 
     @OneToMany(mappedBy = "item", fetch = FetchType.LAZY)
+    @Column
     private List<Image> images = new ArrayList<>();
 
     @ManyToOne

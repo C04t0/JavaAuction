@@ -1,5 +1,5 @@
 package be.syntra.auction.security;
 
-public enum UserRoles {
+public enum Role {
     ADMIN, USER
 }
